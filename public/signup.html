@@ -18,25 +18,25 @@
                     </div>
                     <div class="card-body">
                         <form id="signupForm">
-                            <!-- Name Input -->
+                           
                             <div class="form-group">
                                 <label for="name">Name:</label>
                                 <input type="text" class="form-control" id="name" name="name" required>
                             </div>
                             
-                            <!-- Email Input -->
+                            
                             <div class="form-group">
                                 <label for="email">Email:</label>
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
 
-                            <!-- Password Input -->
+                            
                             <div class="form-group">
                                 <label for="password">Password:</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
 
-                            <!-- Submit Button -->
+                            
                             <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
                         </form>
                     </div>
@@ -62,7 +62,7 @@
                 .then((response) => {
                     console.log(response.data.newUser);
                     alert('User registered successfully.');
-                    // Optionally, redirect to another page or perform other actions after registration.
+                    
                 })
                 .catch((err) => {
                     console.error(err);

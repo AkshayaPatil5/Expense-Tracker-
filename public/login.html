@@ -43,17 +43,18 @@
                 password
             };
 
-            axios.post("http://localhost:3000/login", obj)
-                .then((response) => {
-                    console.log(response.data.user);
-                    alert('Login successful.');
-                    
-                })
-                .catch((error) => {
-                    console.error(error);
-                    alert('Login failed');
-                });
+            axios.post("http://localhost:3000/login/login-user", obj)
+            .then((response) => {
+                console.log(response.data.user);
+                alert('Login successful.');
+                window.location.href = 'expenseform.html';
+            })
+            .catch((error) => {
+                console.error(error);
+                alert('Login failed');
+            });
         });
     </script>
 </body>
 </html>
+

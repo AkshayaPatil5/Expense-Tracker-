@@ -1,8 +1,20 @@
 {
-  "name": "expenseapp",
+  "name": "expensetracker",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-handler": "^0.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.6.0",
+    "pug": "^3.0.2",
+    "sequelize": "^6.32.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
@@ -11,15 +23,5 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.0.1"
-  },
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "express-handler": "^0.2.0",
-    "express-session": "^1.17.3",
-    "mysql2": "^3.6.1",
-    "sequelize": "^6.33.0"
   }
 }

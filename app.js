@@ -3,12 +3,13 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const sequelize = require('./util/database');
 const cors = require('cors');
-const signUpRoutes = require('./routes/signup');
-const loginRoutes = require('./routes/login');
-const expenseRoutes = require('./routes/expenseRoutes'); 
-
+const User = require('./models/users');
+const Expense = require('./models/expenses');
+const userRoutes = require('./routes/user');
+const expenseRoutes = require('./routes/expense'); 
+const dotenv = require('dotenv');
 const app = express();
-
+dotenv.config()
 app.use(cors());
 app.use(bodyParser.json({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -17,9 +18,14 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
 
-app.use('/signup', signUpRoutes);
-app.use('/login', loginRoutes);
+
+
+
+app.use('/user', userRoutes);
 app.use('/expense', expenseRoutes);
+
+User.hasMany(Expense);
+Expense.belongsTo(User);
 
 sequelize
   .sync()
@@ -32,4 +38,4 @@ sequelize
     console.error('Unable to connect to the database:', error);
   });
 
-
+  

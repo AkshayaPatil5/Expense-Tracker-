@@ -69,11 +69,16 @@
     </thead>
     <tbody id="listOfExpensesTable"></tbody>
   </table>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
   <div class="text-right mb-3">
     <button class="btn btn-primary" id="rzp-button">Buy Premium</button>
   </div>
+  <div id="premiumMessage" class="alert alert-success" style="display: none;">
+    You are now a Premium User!
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+  
+  
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   
 
@@ -105,6 +110,7 @@
           console.log(err.response.data);
         });
     }
+
 
     function addNewExpenseToUI(expense) {
       const newRow = document.createElement('tr');
@@ -162,6 +168,7 @@
     
 
     document.getElementById('rzp-button').onclick = async function (e) {
+     
       const token = localStorage.getItem('token');
       console.log('Token:', token);
     
@@ -181,8 +188,13 @@
                 },
                 {
                   headers: { "Authorization": token },
+                  
                 }
               );
+
+              localStorage.setItem('isPremiumUser', 'true');
+              document.getElementById('premiumMessage').style.display = 'block';
+              document.getElementById('rzp-button').disabled = true;
     
               alert("You are a Premium User Now");
             },
@@ -198,6 +210,15 @@
          
           });
         }
+        
+        document.addEventListener('DOMContentLoaded', function () {
+          const isPremiumUser = localStorage.getItem('isPremiumUser');
+          if (isPremiumUser === 'true') {
+   
+          document.getElementById('premiumMessage').style.display = 'block';
+  }
+});
+
     
   </script>
 </body>

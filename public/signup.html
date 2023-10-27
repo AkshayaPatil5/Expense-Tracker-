@@ -6,64 +6,69 @@
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .signup-container {
-            background-color: #fff;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            padding: 20px;
-            width: 400px;
-            text-align: center;
-        }
-        .signup-container h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .signup-form input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .signup-form button {
-            background-color: #007bff;
-            border: none;
-            color: #fff;
-            padding: 10px 20px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .signup-form button:hover {
-            background-color: #0056b3;
-        }
-        .login-link {
-            margin-top: 20px;
-            color: #007bff;
-            text-decoration: none;
-        }
-        .login-link:hover {
-            text-decoration: underline;
-        }
-    </style>
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f2f2f2;
+      }
+  
+      .signup-container {
+          max-width: 400px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fff;
+          border-radius: 5px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+          text-align: center;
+      }
+  
+      h2 {
+          color: #333;
+      }
+  
+      .form-control {
+          width: 100%;
+          margin: 10px 0;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #f9f9f9;
+      }
+  
+      .form-check-input {
+          margin-right: 10px;
+      }
+  
+      .btn-primary {
+          background-color: #007bff;
+          color: #fff;
+      }
+  
+      .btn-primary:hover {
+          background-color: #0056b3;
+      }
+  
+      .login-link {
+          display: block;
+          margin-top: 10px;
+          text-decoration: none;
+          color: #007bff;
+      }
+  
+      .login-link:hover {
+          color: #0056b3;
+      }
+  </style>
+  
 </head>
 <body>
     <div class="signup-container">
         <h2>Sign Up</h2>
-        <form id="signupForm" class="signup-form">>
+        <form id="signupForm" class="signup-form">
             <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
             <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <input type="checkbox" class="form-check-input" id="isPremiumUser" name="ispremiumuser">
+<label class="form-check-label" for="isPremiumUser">Premium User</label>
             <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
         </form>
         <a href="login.html" class="login-link">Log In</a>
@@ -78,7 +83,8 @@
               const signupDetails = {
                 name: e.target.name.value,
                 email: e.target.email.value,
-                password: e.target.password.value
+                password: e.target.password.value,
+                ispremiumuser: e.target.isPremiumUser.checked
               };
           
               try {

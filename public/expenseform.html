@@ -23,6 +23,11 @@
     th {
       background-color: #f2f2f2;
     }
+    div.text-right {
+      position: fixed;
+      top: 20px;
+      right: 20px; 
+    }
   </style>
 </head>
 <body>
@@ -30,12 +35,12 @@
   <form id="expenseForm" class="form-inline">
     <div class="form-group mr-3">
       <label for="amount">Expense Amount:</label>
-      <input type="number" name ="amount" id="amount" class="form-control" required>
+      <input type="number" name="amount" id="amount" class="form-control" required>
     </div>
 
     <div class="form-group mr-3">
-      <label for "description">Expense Description:</label>
-      <input type="text" name ="description" id="description" class="form-control" required>
+      <label for="description">Expense Description:</label>
+      <input type="text" name="description" id="description" class="form-control" required>
     </div>
 
     <div class="form-group mr-3">
@@ -47,10 +52,9 @@
         <option value="Food">Food</option>
       </select>
     </div>
-   
-    <button type="submit" class="btn btn-primary">Add Expense</button>
+    
 
-  
+    <button type="submit" class="btn btn-primary">Add Expense</button>
   </form>
 
   <h2>Expense List</h2>
@@ -67,6 +71,12 @@
   </table>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+  <div class="text-right mb-3">
+    <button class="btn btn-primary" id="rzp-button">Buy Premium</button>
+  </div>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  
+
   <script>
     const form = document.getElementById('expenseForm');
     const listOfExpensesTable = document.getElementById('listOfExpensesTable');
@@ -104,6 +114,7 @@
         <td>${expense.category}</td>
         <td><button onclick="deleteExpense(${expense.id})">Delete Expense</button></td>
       `;
+      newRow.dataset.id = expense.id;
       listOfExpensesTable.appendChild(newRow);
     }
 
@@ -148,6 +159,46 @@
     function showError(err) {
       console.error(err);
     }
+    
+
+    document.getElementById('rzp-button').onclick = async function (e) {
+      const token = localStorage.getItem('token');
+      console.log('Token:', token);
+    
+      const response = await axios.get('http://localhost:3000/purchase/premiummembership', {
+          headers: { 'Authorization': token }
+        });
+        console.log('Response:', response);
+       var options={
+          "key":response.data.key_id,
+          "order_id":response.data.order.id,
+         "handler": async function (response) {
+              await axios.post(
+                'http://localhost:3000/purchase/updatetransactionstatus',
+                {
+                  order_id: options.order_id,
+                  payment_id: response.razorpay_payment_id,
+                },
+                {
+                  headers: { "Authorization": token },
+                }
+              );
+    
+              alert("You are a Premium User Now");
+            },
+          };
+          
+          var rzp = new Razorpay(options);
+          rzp.open();
+          e.preventDefault();
+    
+          rzp.on('payment.failed', function (response) {
+            console.log(response);
+            alert("Something went wrong");
+         
+          });
+        }
+    
   </script>
 </body>
 </html>

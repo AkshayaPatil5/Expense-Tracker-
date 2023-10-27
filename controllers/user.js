@@ -23,7 +23,7 @@ const signup = async (req, res) => {
   }
 };
 
-const generateAccessToken = (id) => jwt.sign({ userId: id }, 'secretkey');
+const generateAccessToken = (id,ispremiumuser) => jwt.sign({ userId: id,ispremiumuser }, 'secretkey');
 
 const login = async (req, res) => {
   try {

@@ -9,6 +9,7 @@ const Order = require('./models/orders');
 const userRoutes = require('./routes/user');
 const expenseRoutes = require('./routes/expense'); 
 const purchaseRoutes = require('./routes/purchase');
+const preiumRoutes = require('./routes/premium');
 const dotenv = require('dotenv');
 const app = express();
 dotenv.config()
@@ -28,6 +29,8 @@ app.use('/user', userRoutes);
 app.use('/expense', expenseRoutes);
 
 app.use('/purchase', purchaseRoutes);
+
+app.use('/premium', preiumRoutes);
 
 
 User.hasMany(Expense);

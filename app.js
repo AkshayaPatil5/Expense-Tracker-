@@ -6,10 +6,12 @@ const cors = require('cors');
 const User = require('./models/users');
 const Expense = require('./models/expenses');
 const Order = require('./models/orders');
+const forgotpassword = require('./models/forgotpassword');
 const userRoutes = require('./routes/user');
 const expenseRoutes = require('./routes/expense'); 
 const purchaseRoutes = require('./routes/purchase');
 const preiumRoutes = require('./routes/premium');
+const forgotPasswordRoutes = require('./routes/resetpassword');
 const dotenv = require('dotenv');
 const app = express();
 dotenv.config()
@@ -32,12 +34,19 @@ app.use('/purchase', purchaseRoutes);
 
 app.use('/premium', preiumRoutes);
 
+app.use('/password', forgotPasswordRoutes);
+
+
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
 
 User.hasMany(Order);
 Order.belongsTo(User);
+
+User.hasMany(forgotpassword);
+forgotpassword.belongsTo(User);
+
 
 sequelize
   .sync()

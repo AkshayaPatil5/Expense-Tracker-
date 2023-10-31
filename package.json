@@ -1,9 +1,9 @@
 {
   "name": "expensetracker",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -14,7 +14,9 @@
     "mysql2": "^3.6.0",
     "pug": "^3.0.2",
     "razorpay": "^2.9.2",
-    "sequelize": "^6.32.1"
+    "sequelize": "^6.32.1",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^9.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -24,5 +26,7 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.0.1"
-  }
+  },
+  "keywords": [],
+  "description": ""
 }

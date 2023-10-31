@@ -15,7 +15,7 @@ const authenticate = (req, res, next) => {
 
         User.findByPk(user.userId).then((user) => {
             if (!user) {
-                // User not found in the database.
+               
                 return res.status(401).json({ success: false, message: 'User not found.' });
             }
 

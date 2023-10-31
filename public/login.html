@@ -26,7 +26,9 @@
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">Login</button>
                         </form>
-                        <a href="signup.html">New User - Sign Up Now</a>
+                        <button onclick="forgotpassword()"> Forgot password</button>
+                        <a href="signup.html">New User - Sign Up Now</a><br>
+                        
                     </div>
                 </div>
             </div>
@@ -58,6 +60,9 @@
                 const errorMessage = err.response ? err.response.data.message : 'An error occurred.';
                 document.body.innerHTML += `<div style='color:red'>${errorMessage}</div>`;
             }
+        }
+        function forgotpassword() {
+            window.location.href = "forgotpassword.html"
         }
     </script>
 </body>

@@ -1,10 +1,12 @@
 const User = require('../models/users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const sequelize= require('../util/database');
 
 const isStringInvalid = (string) => string === undefined || string.length === 0;
 
 const signup = async (req, res) => {
+  let t;
   try {
     const { name, email, password } = req.body;
 
@@ -12,16 +14,28 @@ const signup = async (req, res) => {
       return res.status(400).json({ error: "Bad parameters. Please provide name, email, and password." });
     }
 
+    
+    t = await sequelize.transaction();
+
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    await User.create({ name, email, password: hashedPassword });
+  
+    await User.create({ name, email, password: hashedPassword }, { transaction: t });
+
+    
+    await t.commit();
 
     res.status(201).json({ message: 'Successfully created a new user' });
   } catch (err) {
+    
+    if (t) {
+      await t.rollback();
+    }
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 
 function  generateAccessToken(id,name,ispremiumuser){
  return jwt.sign({ userId: id, name:name, ispremiumuser }, 'secretkey');

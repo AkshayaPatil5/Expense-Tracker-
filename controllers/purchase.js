@@ -30,22 +30,36 @@ const purchasePremium = async (req, res) => {
 };
 
 const updateTransactionStatus = async (req, res) => {
+  let t;
   try {
+    t = await sequelize.transaction(); 
+
     const userId = req.user.id;
     const { payment_id, order_id } = req.body;
 
-    const order = await Order.findOne({ where: { orderid: order_id } });
+    const order = await Order.findOne({ where: { orderid: order_id }, transaction: t });
     await Promise.all([
-      order.update({ paymentid: payment_id, status: 'SUCCESSFUL' }),
-      req.user.update({ ispremiumuser: true })
+      order.update({ paymentid: payment_id, status: 'SUCCESSFUL' }, { transaction: t }),
+      req.user.update({ ispremiumuser: true }, { transaction: t })
     ]);
 
-    return res.status(202).json({ success: true, message: 'Transaction successful', token: userController.generateAccessToken(userId, undefined, true)});
+    await t.commit();
+
+    return res.status(202).json({
+      success: true,
+      message: 'Transaction successful',
+      token: userController.generateAccessToken(userId, undefined, true)
+    });
   } catch (err) {
+    if (t) {
+      await t.rollback(); 
+    }
     console.error(err);
     res.status(404).json({ error: err.message, message: 'Something went wrong' });
   }
 };
+
+
 
 module.exports = {
   purchasePremium,

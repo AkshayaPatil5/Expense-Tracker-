@@ -4,107 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-      body {
-          font-family: Arial, sans-serif;
-          background-color: #f2f2f2;
-      }
-  
-      .signup-container {
-          max-width: 400px;
-          margin: 0 auto;
-          padding: 20px;
-          background-color: #fff;
-          border-radius: 5px;
-          box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-          text-align: center;
-      }
-  
-      h2 {
-          color: #333;
-      }
-  
-      .form-control {
-          width: 100%;
-          margin: 10px 0;
-          padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          background-color: #f9f9f9;
-      }
-  
-      .form-check-input {
-          margin-right: 10px;
-      }
-  
-      .btn-primary {
-          background-color: #007bff;
-          color: #fff;
-      }
-  
-      .btn-primary:hover {
-          background-color: #0056b3;
-      }
-  
-      .login-link {
-          display: block;
-          margin-top: 10px;
-          text-decoration: none;
-          color: #007bff;
-      }
-  
-      .login-link:hover {
-          color: #0056b3;
-      }
-  </style>
-  
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="signup-container">
-        <h2>Sign Up</h2>
-        <form id="signupForm" class="signup-form">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
-        </form>
-        <a href="login.html" class="login-link">Log In</a>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
-    <script>
-        
-            async function signup(e) {
-              e.preventDefault();
-          
-              const signupDetails = {
-                name: e.target.name.value,
-                email: e.target.email.value,
-                password: e.target.password.value,
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+        <div class="signup">
+            <form id="signup-form" >
+                <label for="chk" aria-hidden="true">Sign up</label>
+                <input type="text" name="text" id="name" placeholder="Name" required="">
+                <input type="email" name="email" id="email" placeholder="Email" required="">
+                <input type="password" name="password" id="password" placeholder="Password" required="">
+                <button type="submit">Sign Up</button>
+                <button><a href="./login.html">Login</a></button>
                 
-              };
-          
-              try {
-                const response = await axios.post("http://localhost:3000/user/signup", signupDetails);
-          
-                if (response.status === 201) {
-                  window.location.href = 'login.html'; 
-                } else {
-                  throw new Error('Failed to sign up');
-                }
-              } catch (err) {
-                console.error(err);
-                const errorMessage = err.response ? err.response.data.error : 'An error occurred.';
-                document.body.innerHTML += `<div style="color:red;">${errorMessage}</div>`;
-              }
-            }
-          
-            document.getElementById("signupForm").addEventListener("submit", signup);
-          </script>
-          
+               
+            </form>
+        </div>
+    </div>
+    
+    <script src="./signup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>
-
 
 

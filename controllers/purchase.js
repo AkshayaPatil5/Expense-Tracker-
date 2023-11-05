@@ -1,6 +1,7 @@
 const Order = require('../models/orders');
 const Razorpay = require('razorpay');
 const userController = require('../controllers/user');
+const sequelize = require('../util/database');
 
 const purchasePremium = async (req, res) => {
   try {

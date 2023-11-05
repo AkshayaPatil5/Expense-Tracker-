@@ -38,7 +38,7 @@ const signup = async (req, res) => {
 
 
 function  generateAccessToken(id,name,ispremiumuser){
- return jwt.sign({ userId: id, name:name, ispremiumuser }, 'secretkey');
+ return jwt.sign({ userId: id, name:name, ispremiumuser }, process.env.TOKEN_SECRET);
 }
 
 

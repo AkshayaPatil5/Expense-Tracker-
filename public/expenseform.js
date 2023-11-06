@@ -10,6 +10,7 @@ const form = document.getElementById('expenseForm');
         amount: document.getElementById('amount').value,
         description: document.getElementById('description').value,
         category: document.getElementById('category').value,
+        timestamp: new Date().toISOString()
       };
 
       const token = localStorage.getItem('token'); 
@@ -26,13 +27,13 @@ const form = document.getElementById('expenseForm');
         });
     }
 
-
     function addNewExpenseToUI(expense) {
       const newRow = document.createElement('tr');
       newRow.innerHTML = `
         <td>${expense.amount}</td>
         <td>${expense.description}</td>
         <td>${expense.category}</td>
+        <td>${new Date(expense.timestamp).toDateString()}</td> <!-- Display date -->
         <td><button onclick="deleteExpense(${expense.id})">Delete Expense</button></td>
       `;
       newRow.dataset.id = expense.id;
@@ -142,7 +143,37 @@ const form = document.getElementById('expenseForm');
     
     showLeaderboard();
     
+    function showExpensesByTimeframe(timeframe) {
+      const allExpenses = []; // Store all expenses
     
+      // Retrieve expenses and add them to 'allExpenses' array
+      axios.get('http://localhost:3000/expense/getexpenses', {
+        headers: { 'Authorization': token }
+      })
+      .then(response => {
+        allExpenses.push(...response.data.expenses);
+    
+        // Filter expenses for daily and monthly basis
+        const today = new Date();
+        if (timeframe === 'daily') {
+          const dailyExpenses = allExpenses.filter(expense => {
+            const expenseDate = new Date(expense.timestamp);
+            return expenseDate.toDateString() === today.toDateString();
+          });
+          renderExpenses(dailyExpenses);
+        } else if (timeframe === 'monthly') {
+          const monthlyExpenses = allExpenses.filter(expense => {
+            const expenseDate = new Date(expense.timestamp);
+            return expenseDate.getMonth() === today.getMonth() && expenseDate.getFullYear() === today.getFullYear();
+          });
+          renderExpenses(monthlyExpenses);
+        }
+      })
+      .catch(err => {
+        showError(err);
+        console.log(err.response.data);
+      });
+    }
   
 
     function showError(err) {
@@ -208,4 +239,17 @@ const form = document.getElementById('expenseForm');
         showError("Error during premium membership purchase");
       }
     };
+    function renderExpenses(expenses) {
+      listOfExpensesTable.innerHTML = ''; // Clear the table
+      expenses.forEach(expense => {
+        addNewExpenseToUI(expense);
+      });
+    }
+    
+    // Example usage:
+    // Show daily expenses
+    showExpensesByTimeframe('daily');
+    
+    // Show monthly expenses
+    showExpensesByTimeframe('monthly');
      

@@ -58,11 +58,19 @@
             </div>
         </div>
     </div>
-    <div class="pagination-controls text-center"> <!-- Added a class to center-align the content -->
+    <div class="pagination-controls text-center">
         <button id="prevPageButton" class="btn btn-primary">Previous</button>
         <span>Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
         <button id="nextPageButton" class="btn btn-primary">Next</button>
     </div>
+
+    <label for="expensesPerPage">Expenses per Page:</label>
+    <select id="expensesPerPage" onchange="updateExpensesPerPage()">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+</select>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>
     <script src="expense.js"></script>

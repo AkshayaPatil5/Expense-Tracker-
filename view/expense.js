@@ -1,7 +1,7 @@
 const form = document.querySelector('#form');
 const button = document.getElementById('button');
 let currentPage = 1;
-const itemsPerPage = 5; 
+const itemsPerPage = localStorage.getItem('expensesPerPage') || 10;
 let data;
 
 form.addEventListener('submit', saveExpense);
@@ -320,4 +320,14 @@ function showDownloadReportButton() {
 
 }
 
+function updateExpensesPerPage() {
+    const selectedValue = document.getElementById('expensesPerPage').value;
+    localStorage.setItem('expensesPerPage', selectedValue); // Save selected value to local storage
 
+    // Update the itemsPerPage value with the selected value
+    itemsPerPage = parseInt(selectedValue);
+
+    // Display items for the current page based on the new itemsPerPage value
+    displayItemsForPage(data, currentPage);
+    updatePaginationControls(data);
+}

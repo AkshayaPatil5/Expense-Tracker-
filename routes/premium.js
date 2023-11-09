@@ -1,12 +1,14 @@
-const express = require('express');
-
-const premiumFeatureController = require('../controllers/premium');
-
-const userauthentication = require('../middleware/auth'); 
+const express = require('express')
 
 const router = express.Router();
 
-router.get('/showLeaderBoard', userauthentication.authenticate, premiumFeatureController.getUserLeaderBoard);
+const premiumController = require('../controllers/premium');
+const userauthenticate=require('../middleware/auth');
+
+
+router.get('/purchasepremium', userauthenticate.verifyToken, premiumController.purchasepremium);
+router.post('/updatetranctionstatus', userauthenticate.verifyToken, premiumController.updatetranctionstatus);
+router.get('/leaderboard', userauthenticate.verifyToken, premiumController.leaderboard);
 
 
 module.exports = router;

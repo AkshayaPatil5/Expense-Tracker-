@@ -1,122 +1,109 @@
-const Expense = require('../models/expenses');
-const User = require('../models/users');
-const sequelize= require('../util/database');
-const { BlobServiceClient } = require('@azure/storage-blob');
-const { v1: uuidv1 } = require('uuid');
-
-const addExpense = async (req, res) => {
-    try {
-        const t = await sequelize.transaction();
-
-        const { amount, description, category } = req.body;
-        console.log('Request body:', req.body);
-
-        if (amount === undefined || description === undefined || category === undefined) {
-            return res.status(400).json({ success: false, message: 'Parameters missing' });
-        }
-
-        const expense = await Expense.create(
-            { amount, description, category, userId: req.user.id },
-            { transaction: t }
-        );
-
-        const totalexpenses = Number(req.user.totalexpenses) + Number(amount);
-        console.log(totalexpenses);
-
-        await User.update(
-            { totalexpenses: totalexpenses },
-            { where: { id: req.user.id }, transaction: t }
-        );
-
-        await t.commit();
-        return res.status(201).json({ success: true, expense });
-    } catch (err) {
-        if (t) {
-            await t.rollback();
-        }
-        console.error(err);
-        return res.status(500).json({ success: false, error: err.message || 'Operation failed' });
-    }
-};
+const uuid = require('uuid');
+const sgMail = require('@sendgrid/mail');
+const Sequelize = require('sequelize');
+const userdetailstable =require('../model/userdetails')
+const expense = require('../model/expensemodel');
+const Razorpay = require('razorpay')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const Order=require('../model/order')
+const Forgotpassword = require('../model/forgotpassword');
+const AWS=require('aws-sdk');
 
 
-const getExpenses = async (req, res) => {
-    try {
-        const expenses = await req.user.getExpenses();
-        return res.status(200).json({ success: true, expenses });
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({ success: false, error: 'Failed to fetch expenses' });
-    }
-};
-
-exports.downloadExpenses = async (req ,res)=>{
-    try{
-      const user = await User.findByPk(req.user.userId)
-      const expenses = await user.getExpenses();
-      const stringifyExpenses = JSON.stringify(expenses);
-      const filename = `Expense${user.id}/${new Date()}.txt`;
-       const fileUrl = await uploadToS3(stringifyExpenses, filename);
-      //  console.log(fileUrl)
-         DowHistory.History(fileUrl , user.id)
-      res.status(200).json({fileUrl , success : true});
-    }catch(err){
-      res.status(500).json({fileUrl : '' , success : false});
-    }
-  }
-  
 
 
-const deleteExpense = async (req, res) => {
-    const expenseId = req.params.expenseid;
-
-    if (expenseId === undefined || expenseId.length === 0) {
-        return res.status(400).json({ success: false, message: 'Invalid parameters' });
-    }
-
-    try {
-        
-        const expense = await Expense.findOne({
-            where: { id: expenseId, userId: req.user.id }
+const getexpense = (req, res) => {
+    console.log('expense data send');
+    console.log(req.userId.userid)
+    expense.findAll({ where: { userId: req.userId.userid } })
+        .then((result) => {
+             res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
         });
+};
 
-        if (!expense) {
-            return res.status(404).json({ success: false, message: "Expense doesn't belong to the user" });
+const postexpense = async (req, res, next) => {
+    try {
+        const amount = parseInt(req.body.amount, 10)
+        const description = req.body.description;
+        const catogary = req.body.catogary;
+        const userId = req.userId.userid;
+        // Create a new expense
+        const newExpense = await expense.create({
+            amount,
+            description,
+            catogary,
+            userId,
+        });
+        // Update the totalExpenses column in the users table
+        const user = await userdetailstable.findByPk(userId);
+        if (user) {
+            if (user.totalExpenses === null) {
+                user.totalExpenses = amount;
+            } else {
+                user.totalExpenses += amount; // Add the new expense amount
+            }
+            await user.save();
         }
 
-        const amountToDelete = expense.amount;
-
-        
-        const t = await sequelize.transaction();
-
-        
-        await Expense.destroy({ where: { id: expenseId, userId: req.user.id }, transaction: t });
-
-        
-        const updatedTotalExpenses = Number(req.user.totalexpenses) - Number(amountToDelete);
-        await User.update(
-            { totalexpenses: updatedTotalExpenses },
-            { where: { id: req.user.id }, transaction: t }
-        );
-
-        
-        await t.commit();
-
-        return res.status(200).json({ success: true, message: 'Expense deleted successfully' });
-    } catch (err) {
-        console.error(err);
-        if (t) {
-            await t.rollback();
-        }
-        return res.status(500).json({ success: false, error: 'Failed to delete expense' });
+        res.json(newExpense);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'An error occurred' });
     }
 };
 
 
-module.exports = {
-    deleteExpense,
-    getExpenses,
-    addExpense,
-    downloadExpenses
-};
+const putexpense = (req, res) => {
+    console.log('expense updated');
+    const id = req.params.id;
+    const amount = req.body.amount;
+    const description = req.body.description;
+    const category = req.body.category
+    expense.findByPk(id)
+        .then(updated => {
+            updated.amount = amount;
+            updated.description = description;
+            updated.category = category;
+            return updated.save();
+        })
+        .then(updateddata => {
+            res.json(updateddata);
+        })
+        .catch(err => console.log(err));
+}
+
+const deleteexpense = (req, res) => {
+    console.log('row deleted');
+    const id = req.params.id;
+
+    expense.findByPk(id)
+        .then(data => {
+            if (!data) {
+                // Handle the case where the record with the specified ID was not found.
+                return res.status(404).send('Expense not found');
+            }
+
+            return data.destroy()
+                .then(() => {
+                    res.send('Successfully deleted');
+                })
+        })
+        .catch(err => {
+            res.status(500).send('Internal Server Error');
+        });
+}
+
+
+module.exports={
+
+    deleteexpense,
+    putexpense,
+    postexpense,
+    getexpense,
+   
+}
 

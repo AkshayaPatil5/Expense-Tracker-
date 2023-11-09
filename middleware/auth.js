@@ -1,39 +1,23 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/users');
+const secretKey = "98789d8cedf2f9a86af5391e930337cfe11ffc64ef0140fa8989920e2034a307494d74fe50bd5c7e3f137e56c7da3999309264ae5c29b54937c72f6c27563f28";
+const userdetails = require('../model/userdetails');
 
-const authenticate = (req, res, next) => {
+const verifyToken = (req, res, next) => {
     try {
         const token = req.header('Authorization');
-        
-        if (!token) {
-            return res.status(401).json({ success: false, message: 'Authorization token is missing.' });
-        }
+        const user = jwt.verify(token, "98789d8cedf2f9a86af5391e930337cfe11ffc64ef0140fa8989920e2034a307494d74fe50bd5c7e3f137e56c7da3999309264ae5c29b54937c72f6c27563f28");
 
-        try {
-            const user = jwt.verify(token, process.env.TOKEN_SECRET);
-            console.log('userID >>>> ', user.userId);
+        // Set userId property in the request
+        req.userId = user;
 
-            User.findByPk(user.userId).then((user) => {
-                if (!user) {
-                    return res.status(401).json({ success: false, message: 'User not found for the provided token.' });
-                }
-
-                req.user = user;
-                next();
-            });
-        } catch (tokenError) {
-            console.error(tokenError);
-            return res.status(401).json({ success: false, message: 'Invalid or expired token.' });
-        }
+        // Continue with the next middleware
+        next();
     } catch (err) {
-        console.error(err);
-        return res.status(401).json({ success: false, message: 'Authentication failed.' });
+        res.status(400).json({ success: false, message: 'Invalid token' });
     }
 };
 
-module.exports = {
-    authenticate
-};
-
-
+module.exports={
+    verifyToken
+}
 

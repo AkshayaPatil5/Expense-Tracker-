@@ -95,13 +95,13 @@ const leaderboard = async (req, res) => {
 };
  
 const downloadExpenses = async (req, res) => {
-    //     const data= await expense.findAll({ where: { userId: req.userId.userid } })
-    //        console.log(data)
-    //        const stringfyexpense=JSON.stringify(data)
-    //    const userId= req.userId.userid
-    //     const filename = `Expense${userId}/${new Date()}.txt`
-    //        const fileurl=   await uploadToS3(stringfyexpense,filename)
-    //     res.status(201).json({ fileurl, success: true })
+        const data= await expense.findAll({ where: { userId: req.userId.userid } })
+           console.log(data)
+           const stringfyexpense=JSON.stringify(data)
+       const userId= req.userId.userid
+        const filename = `Expense${userId}/${new Date()}.txt`
+           const fileurl=   await uploadToS3(stringfyexpense,filename)
+        res.status(201).json({ fileurl, success: true })
     };
 
 module.exports={

@@ -14,3 +14,13 @@
 2023-11-18T11:40:03.637Z - Error: ENOENT: no such file or directory, stat 'C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\favicon.ico'
 2023-11-18T11:40:29.031Z - Error: ENOENT: no such file or directory, stat 'C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\favicon.ico'
 2023-11-18T11:40:29.080Z - Error: ENOENT: no such file or directory, stat 'C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\favicon.ico'
+2023-11-28T06:41:26.360Z - Database Sync Error: SequelizeAccessDeniedError: Access denied for user ''@'localhost' (using password: NO)
+    at ConnectionManager.connect (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:94:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:222:24)
+    at async C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:174:32
+    at async ConnectionManager.getConnection (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:197:7)
+    at async C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\sequelize.js:305:26
+    at async MySQLQueryInterface.tableExists (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\query-interface.js:102:17)
+    at async users.sync (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\model.js:939:21)
+    at async Sequelize.sync (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\sequelize.js:377:9)

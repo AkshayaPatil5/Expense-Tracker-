@@ -1,8 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const sequelize = require('./util/database');
+
 const cors = require('cors');
+const sequelize = require('./util/database');
 const helmet = require('helmet')
 const fs = require('fs');
 const path = require('path');
@@ -57,7 +58,7 @@ report.belongsTo(users);
 sequelize.sync({})
     .then((result) => {
 
-        app.listen(process.env.PORT);
+        app.listen(process.env.DB_PORT);
     })
     .catch((err) => {
         errorLogStream.write(`${new Date().toISOString()} - Database Sync Error: ${err.stack}\n`);

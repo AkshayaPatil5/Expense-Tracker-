@@ -24,3 +24,43 @@
     at async MySQLQueryInterface.tableExists (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\query-interface.js:102:17)
     at async users.sync (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\model.js:939:21)
     at async Sequelize.sync (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\sequelize.js:377:9)
+2023-11-29T06:22:25.490Z - Database Sync Error: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND 3000
+    at ConnectionManager.connect (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:96:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:222:24)
+    at async C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:174:32
+    at async ConnectionManager.getConnection (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:197:7)
+    at async C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\sequelize.js:305:26
+    at async MySQLQueryInterface.tableExists (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\query-interface.js:102:17)
+    at async users.sync (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\model.js:939:21)
+    at async Sequelize.sync (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\sequelize.js:377:9)
+2023-11-29T06:23:51.031Z - Database Sync Error: SequelizeAccessDeniedError: Access denied for user 'root'@'localhost' (using password: YES)
+    at ConnectionManager.connect (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:94:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:222:24)
+    at async C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:174:32
+    at async ConnectionManager.getConnection (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:197:7)
+    at async C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\sequelize.js:305:26
+    at async MySQLQueryInterface.tableExists (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\query-interface.js:102:17)
+    at async users.sync (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\model.js:939:21)
+    at async Sequelize.sync (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\sequelize.js:377:9)
+2023-11-29T06:24:01.791Z - Database Sync Error: SequelizeAccessDeniedError: Access denied for user 'root'@'localhost' (using password: YES)
+    at ConnectionManager.connect (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:94:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:222:24)
+    at async C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:174:32
+    at async ConnectionManager.getConnection (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:197:7)
+    at async C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\sequelize.js:305:26
+    at async MySQLQueryInterface.tableExists (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\query-interface.js:102:17)
+    at async users.sync (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\model.js:939:21)
+    at async Sequelize.sync (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\sequelize.js:377:9)
+2023-11-29T06:24:15.520Z - Database Sync Error: SequelizeAccessDeniedError: Access denied for user 'root'@'localhost' (using password: YES)
+    at ConnectionManager.connect (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:94:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:222:24)
+    at async C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:174:32
+    at async ConnectionManager.getConnection (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:197:7)
+    at async C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\sequelize.js:305:26
+    at async MySQLQueryInterface.tableExists (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\dialects\abstract\query-interface.js:102:17)
+    at async users.sync (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\model.js:939:21)
+    at async Sequelize.sync (C:\Users\SHREYASH\OneDrive\Desktop\Akshaya\Expenseapp\node_modules\sequelize\lib\sequelize.js:377:9)

@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${user.totalExpenses === null ? 0 : user.totalExpenses}</td>
                 `;
                 tableBody.appendChild(userRow);
+                
             });
 
             leaderboardTable.appendChild(tableBody);

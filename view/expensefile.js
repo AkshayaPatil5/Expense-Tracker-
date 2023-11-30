@@ -31,6 +31,7 @@ function download() {
             .catch((err) => {
                 console.log(err);
             });
+            
     }
 
 }

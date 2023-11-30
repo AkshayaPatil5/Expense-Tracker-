@@ -82,7 +82,10 @@ function showpremiumusermessage() {
             document.getElementById('premiumusermsg').innerHTML = '<h1>You are a premium user</h1>';
         }
     } catch (error) {
+
         console.error(error);
+
         alert('Error decoding the token');
+        
     }
 }

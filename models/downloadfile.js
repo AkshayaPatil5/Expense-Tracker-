@@ -6,6 +6,7 @@ const Download = sequelize.define('download', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  
   fileurl: {
     type: DataTypes.STRING, 
     allowNull: false,

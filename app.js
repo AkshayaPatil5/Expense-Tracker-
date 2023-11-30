@@ -1,6 +1,6 @@
-require('dotenv').config();
 const express = require('express');
 const app = express();
+require('dotenv').config();
 
 const cors = require('cors');
 const sequelize = require('./util/database');
@@ -8,13 +8,11 @@ const helmet = require('helmet')
 const fs = require('fs');
 const path = require('path');
 
-
 const expense = require('./models/expense')
 const users = require('./models/user')
 const order = require('./models/order')
-const Forgotpassword = require('./models/password');
+const forgotpassword = require('./models/password');
 const report= require('./models/downloadfile');
-
 
 const userRoutes = require('./routes/user')
 const expenseRoutes= require('./routes/expense')
@@ -47,8 +45,8 @@ users.hasMany(expense, { foreignKey: 'userId' });
 
 order.belongsTo(users);
 
-users.hasMany(Forgotpassword);
-Forgotpassword.belongsTo(users);
+users.hasMany(forgotpassword);
+forgotpassword.belongsTo(users);
  
 users.hasMany(report);
 report.belongsTo(users);

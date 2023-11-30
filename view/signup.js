@@ -81,4 +81,5 @@ const container = document.getElementById('container');
                     alert('An error occurred during login');
                     console.log(error);
                 });
+                
         });

@@ -29,6 +29,7 @@ async function saveExpense(event) {
   }
 }
 
+
 function displayItemsForPage(data, page) {
   const startIdx = (page - 1) * itemsPerPage;
   const endIdx = startIdx + itemsPerPage;

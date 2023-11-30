@@ -5,8 +5,6 @@ const Razorpay = require('razorpay')
 const Order = require('../models/order')
 require('dotenv').config();
 
-
-
 const purchasePremium = async (req, res) => {
     try {
         var rzp = new Razorpay({ key_id: process.env.RAZORPAY_KEY_ID, key_secret: process.env.RAZORPAY_KEY_SECRET})

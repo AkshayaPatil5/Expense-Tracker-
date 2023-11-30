@@ -9,14 +9,13 @@ const fs = require('fs');
 const path = require('path');
 
 
-//models
 const expense = require('./models/expense')
 const users = require('./models/user')
 const order = require('./models/order')
 const Forgotpassword = require('./models/password');
 const report= require('./models/downloadfile');
 
-//routes
+
 const userRoutes = require('./routes/user')
 const expenseRoutes= require('./routes/expense')
 const purchaseRoutes = require('./routes/premium')

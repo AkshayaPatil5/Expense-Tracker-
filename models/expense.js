@@ -8,7 +8,7 @@ const Expense = sequelize.define('expense', {
         allowNull: false,
         primaryKey: true
     },
-    
+
     amount: {
         type: Sequelize.INTEGER,
         allowNull: false
@@ -24,6 +24,7 @@ const Expense = sequelize.define('expense', {
         allowNull: false
     }
 
+    
 })
 
 module.exports = Expense;

@@ -95,6 +95,7 @@ const updateToken = async (req, res) => {
     }
 };
 
+
 module.exports = {
    signupDetails,
    loginDetails,

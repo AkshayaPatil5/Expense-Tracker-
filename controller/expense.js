@@ -21,6 +21,7 @@ function uploadToS3(stringfyexpense, filename) {
         ACL: 'public-read'
     }
 
+    
     return new Promise((resolve, reject) => {
         s3Bucket.upload(params, (err, s3response) => {
             if (err) {

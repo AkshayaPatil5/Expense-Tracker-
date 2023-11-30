@@ -12,5 +12,4 @@ router.post('/login', userController.loginDetails);
 
 router.get('/get-new-token',userauthenticate.authenticate,userController.updateToken)
 
-
 module.exports = router;

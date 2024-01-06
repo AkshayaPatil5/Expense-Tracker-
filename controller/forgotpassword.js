@@ -113,4 +113,5 @@ module.exports={
   resetpassword,
   updatepassword,
   emailPage
+  
 }

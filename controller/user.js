@@ -42,7 +42,6 @@ const logindetails = async (req, res,) => {
 }
 
 
-
 const signupdetails = async (req, res, next) => {
     try {
         const Name = req.body.name;

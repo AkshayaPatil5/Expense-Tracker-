@@ -1,3 +1,9 @@
+document.getElementById('downloadexpense').onclick = function () {
+    download()
+}
+
+
+
 function parseJwt(token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -7,6 +13,9 @@ function parseJwt(token) {
 
     return JSON.parse(jsonPayload);
 }
+
+
+
 function download() {
     const token = localStorage.getItem('token');
     const decodedtoken = parseJwt(token)
@@ -15,7 +24,7 @@ function download() {
     }
 
     else {
-        axios.get('http://localhost:3000/expense/download', { headers: { "Authorization": token } })
+        axios.get('/expense/download', { headers: { "Authorization": token } })
             .then((response) => {
                 if (response.status === 201) {
                     var a = document.createElement("a");
@@ -31,21 +40,6 @@ function download() {
             .catch((err) => {
                 console.log(err);
             });
-            
     }
 
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-    const navbarContainer = document.getElementById('navbar-container');
-    const xhr = new XMLHttpRequest();
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            navbarContainer.innerHTML = xhr.responseText;
-        }
-    };
-
-    xhr.open("GET", "navbar.html", true);
-    xhr.send();
-});

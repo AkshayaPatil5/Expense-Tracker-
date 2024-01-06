@@ -7,15 +7,15 @@ const Controller = require('../controller/expense')
 const userauthenticate = require('../middleware/auth')
 
 
-router.get('/getexpenses', userauthenticate.authenticate, Controller.getExpenses);
+router.get('/getexpenses', userauthenticate.verifyToken, Controller.getexpense)
 
-router.post('/postexpense', userauthenticate.authenticate, Controller.postExpense);
+router.post('/postexpense', userauthenticate.verifyToken, Controller.postexpense);
 
-router.delete(`/deleteexpense/:id`,Controller.deleteExpense);
+router.delete(`/deleteexpense/:id`, userauthenticate.verifyToken,Controller.deleteexpense)
 
-router.get('/download', userauthenticate.authenticate, Controller.downloadExpenses);
+router.get('/download', userauthenticate.verifyToken, Controller.downloadExpenses)
 
-router.get('/leaderboard', userauthenticate.authenticate, Controller.leaderboard);
+router.get('/leaderboard', userauthenticate.verifyToken, Controller.leaderboard)
 
 
 

@@ -2,14 +2,13 @@ const express = require('express')
 
 const router = express.Router();
 
-const userController = require('../controller/user')
-const userauthenticate = require('../middleware/auth');
+const Controller = require('../controller/user')
 
 
-router.post('/signup', userController.signupDetails);
+router.post('/signup', Controller.signupdetails)
+router.post('/login', Controller.logindetails)
+router.get('/get-new-token', Controller.updatetoken)
+router.get('', Controller.usergethomePage);
 
-router.post('/login', userController.loginDetails);
-
-router.get('/get-new-token',userauthenticate.authenticate,userController.updateToken)
 
 module.exports = router;

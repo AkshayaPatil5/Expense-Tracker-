@@ -1,63 +1,63 @@
+//imports
+require('dotenv').config();
 const express = require('express');
 const app = express();
-require('dotenv').config();
-
-const cors = require('cors');
 const sequelize = require('./util/database');
-const helmet = require('helmet')
-const fs = require('fs');
+const cors = require('cors');
 const path = require('path');
 
-const expense = require('./models/expense')
-const users = require('./models/user')
-const order = require('./models/order')
-const forgotpassword = require('./models/password');
-const report= require('./models/downloadfile');
 
-const userRoutes = require('./routes/user')
-const expenseRoutes= require('./routes/expense')
-const purchaseRoutes = require('./routes/premium')
-const resetpassword = require('./routes/password')
+//models
+const expense = require('./model/expensemodel')
+const users = require('./model/userdetails')
+const order = require('./model/order')
+const Forgotpassword = require('./model/forgotpassword');
 
 
-const errorLogStream = fs.createWriteStream(path.join(__dirname, 'error.log'), { flags: 'a' });
+//routes
+const mainpageroute = require('./routes/mainpageroute')
+const user = require('./routes/user')
+const expenseroute = require('./routes/expense')
+const purchase = require('./routes/purchase')
+const resetpassword = require('./routes/resetpassword')
 
+
+//middlewares
 app.use(cors())
 app.use(express.json())
 
-app.use(express.static(path.join(__dirname, 'view')));
+
+//static serving 
+app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/user',userRoutes);
-app.use('/expense',expenseRoutes);
-app.use('/purchase', purchaseRoutes);
-app.use('/forgotpasswaord', resetpassword);
+//redirection
+app.use(mainpageroute)
+app.use('/user', user)
+app.use('/expense', expenseroute)
+app.use('/purchase', purchase)
+app.use('/password', resetpassword)
 
 
-app.use((err, req, res, next) => {
-    errorLogStream.write(`${new Date().toISOString()} - ${err.stack}\n`);
-    res.status(500).send('Something failed!');
-});
+// Define associations
+users.hasMany(expense);
+expense.belongsTo(users);
 
-
-expense.belongsTo(users, { foreignKey: 'userId' });
-users.hasMany(expense, { foreignKey: 'userId' });
-
+users.hasMany(order);
 order.belongsTo(users);
 
-users.hasMany(forgotpassword);
-forgotpassword.belongsTo(users);
- 
-users.hasMany(report);
-report.belongsTo(users);
+users.hasMany(Forgotpassword);
+Forgotpassword.belongsTo(users);
 
 
+
+
+//this is to intialise database tables and then start the servers
 sequelize.sync({})
     .then((result) => {
 
         app.listen(process.env.DB_PORT);
     })
     .catch((err) => {
-        errorLogStream.write(`${new Date().toISOString()} - Database Sync Error: ${err.stack}\n`);
-        console.log('Error syncing the database:', err);
+        console.log(err);
     })

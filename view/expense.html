@@ -12,11 +12,37 @@
 </head>
 
 <body>
-    <div id="navbar-container"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="\pics\exp.png" alt="Logo" width="60" height="60" class="d-inline-block align-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/user">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/purchase/downloadreport">Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/purchase/leaderboard">Leaderboard</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/purchase/premiummembership">Premium Membership</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container mt-4">
-        <div class="card bg-light">
+        <div class="card bg-primary text-white">
             <div class="card-body">
-                <form class="bg-light rounded" id="form">
+                <form class="bg-primary p-3 rounded" id="form">
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <label for="amount" class="form-label text-black border-bottom border-dark">Amount
@@ -37,13 +63,12 @@
                             <select id="catogary" class="form-select" name="catogary" required>
                                 <option selected disabled>Select expense Category</option>
                                 <option>Home</option>
-                                <option>Travelling</option>
-                                <option>Food</option>
-                                <option>Shopping</option>
+                                <option>Fuel</option>
+                                <option>Groceries</option>
                             </select>
                         </div>
                     </div>
-                    <button class="btn btn-success" id="button" data-id="">Submit</button>
+                    <button class="btn btn-light" id="button" data-id="">AddExpense</button>
                 </form>
             </div>
         </div>
@@ -51,30 +76,30 @@
     <div class="container mt-4">
         <div class="table-container">
             <table id="userTable" class="table table table-dark table-borderless" style="background-color: #f0f8ff;">
-                <thead class="white-bg">
+                <thead class="blue-bg">
                     <tr>
                         <th>Date</th>
                         <th>Amount</th>
                         <th>Description</th>
                         <th>Category</th>
                         <th></th>
+                        <!-- You can add more headers if needed -->
                     </tr>
                 </thead>
                 <tbody id="userTableBody">
+                    <!-- User data rows will be added here -->
                 </tbody>
             </table>
         </div>
         <div class="pagination-controls text-center mt-4">
-            <button id="prevPageButton" class="btn btn-warning">Previous</button>
+            <button id="prevPageButton" class="btn btn-primary">Previous</button>
             <span>Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
-            <button id="nextPageButton" class="btn btn-warning">Next</button>
+            <button id="nextPageButton" class="btn btn-primary">Next</button>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>
-    
-    <script src="./expense.js"></script>
-    
+    <script src="/js/expense.js"></script>
 </body>
 
 </html>

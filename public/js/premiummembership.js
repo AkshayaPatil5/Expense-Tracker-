@@ -1,23 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
     showpremiumusermessage()
-    const navbarContainer = document.getElementById('navbar-container');
-    const xhr = new XMLHttpRequest();
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            navbarContainer.innerHTML = xhr.responseText;
-        }
-    };
-
-    xhr.open("GET", "navbar.html", true);
-    xhr.send();
 })
 
 document.getElementById('paybutton').onclick = async function (e) {
     const token = localStorage.getItem('token');
 
     try {
-        const response = await axios.get('http://localhost:3000/purchase/purchasepremium', {
+        const response = await axios.get('/purchase/purchasepremium', {
             headers: {
                 "Authorization": token
             }
@@ -28,7 +17,7 @@ document.getElementById('paybutton').onclick = async function (e) {
             "order_id": response.data.order.id,
             "handler": async function (response) {
 
-                await axios.post('http://localhost:3000/purchase/updatetranctionstatus', {
+                await axios.post('/purchase/updatetranctionstatus', {
                     order_id: options.order_id,
                     payment_id: response.razorpay_payment_id,
                 }, {
@@ -37,7 +26,7 @@ document.getElementById('paybutton').onclick = async function (e) {
                     }
                 });
 
-                const newTokenResponse = await axios.get('http://localhost:3000/user/get-new-token', {
+                const newTokenResponse = await axios.get('/user/get-new-token', {
                     headers: {
                         "Authorization": token
                     }
@@ -82,10 +71,7 @@ function showpremiumusermessage() {
             document.getElementById('premiumusermsg').innerHTML = '<h1>You are a premium user</h1>';
         }
     } catch (error) {
-
         console.error(error);
-
         alert('Error decoding the token');
-        
     }
 }

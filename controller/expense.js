@@ -115,7 +115,6 @@ const downloadExpenses = async (req, res) => {
 
 
 module.exports={
-
     postexpense,
     getexpense,
     deleteexpense,

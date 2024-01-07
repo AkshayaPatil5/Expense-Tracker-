@@ -55,6 +55,7 @@ const leaderboardPage = (request, response, next) => {
     response.sendFile('leaderboard.html', { root: 'view' });
 }
 
+
 const downloadreport = (request, response, next) => {
     response.sendFile('downloadreport.html', { root: 'view' });
 }

@@ -8,19 +8,24 @@ const users = sequelize.define('users', {
         primaryKey: true,
         autoIncrement: true,
     },
+
     Name: {
         type: Sequelize.STRING,
         allowNull: false,
     },
+
     Email: {
         type: Sequelize.STRING,
         allowNull: false,
     },
+
     password: {
         type: Sequelize.STRING,
         allowNull: false,
     },
+
     ispremiumuser: Sequelize.BOOLEAN,
+    
     totalExpenses: Sequelize.INTEGER
 });
 

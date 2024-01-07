@@ -9,6 +9,7 @@ const router = express.Router();
 
 
 router.get('/', mainpageController.gethomePage);
-router.get('', mainpageController.geterrorPage)
+
+router.get('', mainpageController.geterrorPage);
 
 module.exports = router;

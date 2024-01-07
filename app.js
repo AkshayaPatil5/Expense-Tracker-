@@ -46,6 +46,7 @@ Forgotpassword.belongsTo(users);
 
 
 sequelize.sync({})
+
     .then((result) => {
 
         app.listen(process.env.DB_PORT);

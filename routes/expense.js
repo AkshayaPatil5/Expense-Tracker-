@@ -7,7 +7,7 @@ const Controller = require('../controller/expense')
 const userauthenticate = require('../middleware/auth')
 
 
-router.get('/getexpenses', userauthenticate.verifyToken, Controller.getexpense)
+router.get('/getexpenses', userauthenticate.verifyToken, Controller.getexpense);
 
 router.post('/postexpense', userauthenticate.verifyToken, Controller.postexpense);
 

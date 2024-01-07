@@ -14,5 +14,5 @@ const Download = sequelize.define('download', {
 });
 
 
-module.exports = Download;
+module.exports =  Download;
 

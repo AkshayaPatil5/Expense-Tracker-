@@ -6,8 +6,11 @@ const Controller = require('../controller/user')
 
 
 router.post('/signup', Controller.signupdetails)
+
 router.post('/login', Controller.logindetails)
-router.get('/get-new-token', Controller.updatetoken)
+
+router.get('/get-new-token', Controller.updatetoken);
+
 router.get('', Controller.usergethomePage);
 
 

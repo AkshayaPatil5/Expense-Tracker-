@@ -42,12 +42,13 @@ users.hasMany(order);
 order.belongsTo(users);
 
 users.hasMany(Forgotpassword);
+
 Forgotpassword.belongsTo(users);
 
 
 sequelize.sync({})
 
-    .then((result) => {
+ .then((result) => {
 
         app.listen(process.env.DB_PORT);
     })
